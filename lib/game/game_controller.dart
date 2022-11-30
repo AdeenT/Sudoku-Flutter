@@ -228,7 +228,7 @@ class GameController extends GetxController {
       content: SizedBox(
         height: 150,
         child: InkWell(
-          onTap: () => Get.offAll(const HomeScreen()),
+          onTap: () => Get.offAll(const BottomAppBar()),
           child: const Text('Yes'),
         ),
       ),
