@@ -14,7 +14,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> lists = [
     const HomeScreen(),
     const LeaderBoard(),
-    const Account(),
+    Account(userImage: '',),
   ];
   int activeIndex = 0;
   @override
@@ -41,7 +41,7 @@ class _BottomBarState extends State<BottomBar> {
               icon: Icon(
                 Icons.person,
               ),
-              label: 'account')
+              label: 'Account')
         ],
         onTap: (index) {
           setState(() {

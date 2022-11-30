@@ -22,7 +22,18 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(
-              height: 250,
+              height: 30,
+              child: ListTile(
+                leading: Icon(
+                  Icons.star_rate_rounded,
+                  color: Colors.amber,
+                  size: 40,
+                ),
+                title: Text(''),
+              ),
+            ),
+            const SizedBox(
+              height: 220,
             ),
             const Align(
               alignment: Alignment.center,

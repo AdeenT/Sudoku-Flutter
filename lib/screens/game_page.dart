@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sudoku/game/game_controller.dart';
+import 'package:sudoku/controllers/game_controller.dart';
 import 'package:sudoku/model/box_chart.dart';
+
+import '../controllers/game_controller.dart';
 
 class GamePage extends StatefulWidget {
   final int difficult;
@@ -31,15 +33,17 @@ class _GamePageState extends State<GamePage> {
         () {
           if (controller.sudoku.isEmpty) return Container();
           return Scaffold(
-            // appBar: AppBar(
-            //   title: const Text(
-            //     'Sudoku+',
-            //     style: TextStyle(
-            //         color: Colors.black87,
-            //         fontSize: 32,
-            //         fontWeight: FontWeight.w600),
-            //   ),
-            // ),
+            appBar: AppBar(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              title: const Text(
+                'Sudoku+',
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
             backgroundColor: Colors.white,
             body: Column(
               children: [
@@ -98,12 +102,6 @@ class _GamePageState extends State<GamePage> {
             Icons.restart_alt,
           ),
         ),
-        InkWell(
-          onTap: controller.onExit,
-          child: const Icon(
-            Icons.exit_to_app,
-          ),
-        ),
       ],
     );
   }
@@ -125,8 +123,8 @@ class _GamePageState extends State<GamePage> {
                     controller.update();
                   },
                   child: Container(
-                    width: 30,
-                    height: 30,
+                    width: 36.0,
+                    height: 35.0,
                     margin: EdgeInsets.only(
                       bottom: row % 3 == 2 ? 2 : 0,
                       right: col % 3 == 2 ? 2 : 0,

@@ -42,104 +42,106 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Form(
-              key: loginKey,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const Text(
-                    'Enjoy Free Sudoku \n          Puzzles',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  TextFormField(
-                    controller: _userController,
-                    decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 240, 246, 253),
-                        border: OutlineInputBorder(),
-                        hintText: 'Username'),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter username';
-                      } else if (islogged == false) {
-                        return "username and password doesn't match";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  TextFormField(
-                      controller: _passController,
-                      obscureText: true,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Form(
+                key: loginKey,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    const Text(
+                      'Enjoy Free Sudoku \n          Puzzles',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    TextFormField(
+                      controller: _userController,
                       decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromARGB(255, 240, 246, 253),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.blue,
-                          ),
-                        ),
-                        hintText: 'Password',
-                      ),
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 240, 246, 253),
+                          border: OutlineInputBorder(),
+                          labelText: 'Username'),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter password';
+                          return 'Please enter username';
                         } else if (islogged == false) {
                           return "username and password doesn't match";
                         } else {
                           return null;
                         }
-                      }),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  SizedBox(
-                    width: 100,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        loginKey.currentState!.validate();
-                        checkLogin(context);
                       },
-                      style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                      ),
-                      child: const Text(
-                        'Log in',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    TextFormField(
+                        controller: _passController,
+                        obscureText: true,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 240, 246, 253),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.blue,
+                            ),
+                          ),
+                          labelText: 'Password',
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Please enter password';
+                          } else if (islogged == false) {
+                            return "username and password doesn't match";
+                          } else {
+                            return null;
+                          }
+                        }),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    SizedBox(
+                      width: 100,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          loginKey.currentState!.validate();
+                          checkLogin(context);
+                        },
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                        ),
+                        child: const Text(
+                          'Log in',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  const Text("Don't have any account?"),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignupScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text('Create one>>'))
-                ],
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Text("Don't have any account?"),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignupScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text('Create one>>'))
+                  ],
+                ),
               ),
             ),
           ),

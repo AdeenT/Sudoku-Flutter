@@ -1,10 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:sudoku/screens/settings.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sudoku/main.dart';
 import 'package:sudoku/signupin/login_page.dart';
+import 'package:sudoku/signupin/signup_page.dart';
 
-class Account extends StatelessWidget {
-  const Account({super.key});
+// ignore: must_be_immutable
+class Account extends StatefulWidget {
+  String userImage = 'assets/images/user.png';
+  Account({
+    Key? key,
+    required this.userImage,
+  }) : super(key: key);
 
+  @override
+  State<Account> createState() => _AccountState();
+}
+
+class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,25 +29,6 @@ class Account extends StatelessWidget {
           style: TextStyle(
               color: Colors.black87, fontSize: 26, fontWeight: FontWeight.w600),
         ),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              icon: const Icon(
-                Icons.settings,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Settings(),
-                  ),
-                );
-              },
-            ),
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -49,7 +43,7 @@ class Account extends StatelessWidget {
                       builder: (context) {
                         return AlertDialog(
                           content: SizedBox(
-                            height: 300,
+                            height: 270,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -99,12 +93,12 @@ class Account extends StatelessWidget {
               ),
               CircleAvatar(
                 backgroundColor: Colors.transparent,
-                radius: 60,
+                radius: 45,
                 child: ClipRRect(
-                  child: Image.asset('assets/images/user.png'),
+                  child: Image.asset(widget.userImage),
                 ),
               ),
-               Text(
+              Text(
                 playerName,
                 style: const TextStyle(
                   fontSize: 16,
@@ -130,6 +124,66 @@ class Account extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 500,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView(
+                    children: [
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      const ListTile(
+                        leading: Icon(Icons.event_note_sharp),
+                        title: Text('How to Play'),
+                        trailing: Icon(Icons.arrow_forward_ios),
+                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                        iconColor: Colors.black,
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const ListTile(
+                        leading: Icon(Icons.feedback_outlined),
+                        title: Text('Feedback'),
+                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                        iconColor: Colors.black,
+                      ),
+                      const ListTile(
+                        leading: Icon(Icons.info_outline),
+                        title: Text('About'),
+                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                        iconColor: Colors.black,
+                      ),
+                      const ListTile(
+                        leading: Icon(Icons.help_outline_sharp),
+                        title: Text('Help'),
+                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                        iconColor: Colors.black,
+                      ),
+                      const ListTile(
+                        leading: Icon(Icons.door_front_door_outlined),
+                        title: Text('Exit'),
+                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                        iconColor: Colors.black,
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.logout),
+                        title: const Text('Log out'),
+                        tileColor: const Color.fromARGB(255, 235, 249, 244),
+                        iconColor: Colors.red,
+                        onTap: () {
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                builder: (context) => const LoginScreen(),
+                              ),
+                              (Route<dynamic> route) => false);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -138,7 +192,12 @@ class Account extends StatelessWidget {
   }
 
   Widget _avatarPics(String avatar) => InkWell(
-        onTap: (){
+        onTap: () {
+          setState(() {
+            widget.userImage = avatar;
+            Navigator.pop(context);
+          });
+          user.image = widget.userImage;
         },
         child: CircleAvatar(
           radius: 30,

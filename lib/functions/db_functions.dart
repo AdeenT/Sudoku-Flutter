@@ -9,7 +9,6 @@ import '../main.dart';
 ValueNotifier<List<LoginModel>> usersNotifier = ValueNotifier([]);
 
 Future<void> addUser(LoginModel value) async {
-  // final loginDb = await Hive.openBox<LoginModel>('login_db');
   final id = await loginDb.add(value);
   value.id = id;
   usersNotifier.notifyListeners();

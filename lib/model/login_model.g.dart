@@ -17,17 +17,18 @@ class LoginModelAdapter extends TypeAdapter<LoginModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return LoginModel(
+      id: fields[0] as int?,
       username: fields[1] as String,
       password: fields[2] as String,
       leaderboard: fields[3] as String,
-      id: fields[0] as int?,
+      image: fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, LoginModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class LoginModelAdapter extends TypeAdapter<LoginModel> {
       ..writeByte(2)
       ..write(obj.password)
       ..writeByte(3)
-      ..write(obj.leaderboard);
+      ..write(obj.leaderboard)
+      ..writeByte(4)
+      ..write(obj.image);
   }
 
   @override

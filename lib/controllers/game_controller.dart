@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/model/box_chart.dart';
-import 'package:sudoku/screens/home_screen.dart';
 import 'package:sudokuer/sudokuer.dart' as s;
 
 class GameController extends GetxController {
@@ -79,7 +78,7 @@ class GameController extends GetxController {
       }
     }
     if (isComplete) {
-      Get.offAll(const HomeScreen());
+      Get.back();
     }
   }
 
@@ -220,18 +219,5 @@ class GameController extends GetxController {
         }
       }
     }
-  }
-
-  void onExit() {
-    Get.defaultDialog(
-      title: 'Go to main menu?',
-      content: SizedBox(
-        height: 150,
-        child: InkWell(
-          onTap: () => Get.offAll(const BottomAppBar()),
-          child: const Text('Yes'),
-        ),
-      ),
-    );
   }
 }

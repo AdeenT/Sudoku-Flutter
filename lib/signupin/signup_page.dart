@@ -3,6 +3,8 @@ import 'package:sudoku/functions/db_functions.dart';
 import 'package:sudoku/model/login_model.dart';
 import 'package:sudoku/signupin/login_page.dart';
 
+
+var user;
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
@@ -59,7 +61,7 @@ class _SignupScreen extends State<SignupScreen> {
                         filled: true,
                         fillColor: Color.fromARGB(255, 240, 246, 253),
                         border: OutlineInputBorder(),
-                        hintText: 'Enter Username',
+                        labelText: 'Enter Username',
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -78,7 +80,7 @@ class _SignupScreen extends State<SignupScreen> {
                         filled: true,
                         fillColor: Color.fromARGB(255, 240, 246, 253),
                         border: OutlineInputBorder(),
-                        hintText: 'Enter Password',
+                        labelText: 'Enter Password',
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -97,7 +99,7 @@ class _SignupScreen extends State<SignupScreen> {
                         filled: true,
                         fillColor: Color.fromARGB(255, 240, 246, 253),
                         border: OutlineInputBorder(),
-                        hintText: 'Confirm Password',
+                        labelText: 'Confirm Password',
                       ),
                       validator: (value) {
                         if (
@@ -157,8 +159,8 @@ class _SignupScreen extends State<SignupScreen> {
     if (name.isEmpty || password.isEmpty || confirm.isEmpty || confirm!=password ) {
       return;
     }
-    final user =
-        LoginModel(username: name, password: password, leaderboard: name);
+    user =
+        LoginModel(username: name, password: password, leaderboard: name, image: 'assets/images/user.png',);
     addUser(user);
 
     ScaffoldMessenger.of(ctx).showSnackBar(
