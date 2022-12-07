@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sudoku/main.dart';
 import 'package:sudoku/screens/bottom_navigation.dart';
 import 'package:sudoku/signupin/signup_page.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-late String playerName;
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -72,10 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           border: OutlineInputBorder(),
                           labelText: 'Username'),
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please enter username';
-                        } else if (islogged == false) {
-                          return "username and password doesn't match";
+                        if (value!.isEmpty || islogged == false) {
+                          return 'Please enter a valid username';
                         } else {
                           return null;
                         }
@@ -85,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 24,
                     ),
                     TextFormField(
+                     
                         controller: _passController,
                         obscureText: true,
                         decoration: const InputDecoration(
@@ -98,10 +99,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelText: 'Password',
                         ),
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter password';
-                          } else if (islogged == false) {
-                            return "username and password doesn't match";
+                          if (value!.isEmpty || islogged == false) {
+                            return 'Please enter a valid password';
                           } else {
                             return null;
                           }
@@ -117,7 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           checkLogin(context);
                         },
                         style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                          backgroundColor:
+                              MaterialStatePropertyAll(Colors.blue),
                         ),
                         child: const Text(
                           'Log in',
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void checkLogin(BuildContext ctx) {
+  void checkLogin(BuildContext ctx) async {
     final user = _userController;
     final pass = _passController;
     var box = Hive.box('login_db');
@@ -159,10 +159,13 @@ class _LoginScreenState extends State<LoginScreen> {
       if (element.username == user.text && element.password == pass.text) {
         playerName = user.text;
         islogged = true;
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const BottomBar()),
-            (route) => false);
+        final sharedprefs = await SharedPreferences.getInstance();
+        await sharedprefs.setBool(USER_KEY, true);
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BottomBar()),
+        );
       }
     }
     if (islogged == false) {

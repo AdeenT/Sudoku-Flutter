@@ -1,9 +1,11 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sudoku/main.dart';
+import 'package:sudoku/screens/bottom_navigation.dart';
+import 'package:sudoku/screens/home_screen.dart';
 import 'package:sudoku/signupin/login_page.dart';
+import'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,13 +19,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 2),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: ((context) => LoginScreen()),
-        ),
-      ),
+      const Duration(seconds: 2),
+      (){
+        keepUserLoggedIn();
+      }
     );
   }
 
@@ -40,10 +39,23 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 210.0,
               width: 210.0,
             ),
-            CircularProgressIndicator.adaptive(valueColor: AlwaysStoppedAnimation<Color>(Colors.blue)),
+            const CircularProgressIndicator.adaptive(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.blue)),
           ],
         ),
       ),
     );
+  }
+
+  void keepUserLoggedIn() async{
+
+    final sharedprefs = await SharedPreferences.getInstance();
+    final userLoggedIn = sharedprefs.getBool(USER_KEY);
+    if(userLoggedIn == null|| userLoggedIn == false){
+      Get.offAll(()=>const LoginScreen());
+    }else{
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const BottomBar()),);
+    }
+
   }
 }

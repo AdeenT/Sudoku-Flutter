@@ -1,10 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/controllers/game_controller.dart';
+import 'package:sudoku/controllers/timer_controller.dart';
 import 'package:sudoku/model/box_chart.dart';
 
-import '../controllers/game_controller.dart';
 
 class GamePage extends StatefulWidget {
   final int difficult;
@@ -19,6 +19,7 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   final controller = Get.put(GameController());
+  final timerr = Get.put(TimerController());
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _GamePageState extends State<GamePage> {
           if (controller.sudoku.isEmpty) return Container();
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               foregroundColor: Colors.black,
               backgroundColor: Colors.white,
               title: const Text(
@@ -102,6 +104,7 @@ class _GamePageState extends State<GamePage> {
             Icons.restart_alt,
           ),
         ),
+        Text(timerr.time.value)
       ],
     );
   }

@@ -6,7 +6,7 @@ part 'login_model.g.dart';
 @HiveType(typeId: 1)
 class LoginModel extends HiveObject {
   @HiveField(0)
-  int? id;
+  int? uid;
 
   @HiveField(1)
   final String username;
@@ -14,16 +14,9 @@ class LoginModel extends HiveObject {
   @HiveField(2)
   final String password;
 
-  @HiveField(3)
-  final String leaderboard;
-
-  @HiveField(4)
-  String image;
   LoginModel({
-    this.id,
+    this.uid,
     required this.username,
     required this.password,
-    required this.leaderboard,
-    required this.image,
   });
 }

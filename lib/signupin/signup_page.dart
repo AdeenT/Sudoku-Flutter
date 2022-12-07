@@ -4,6 +4,7 @@ import 'package:sudoku/model/login_model.dart';
 import 'package:sudoku/signupin/login_page.dart';
 
 
+// ignore: prefer_typing_uninitialized_variables
 var user;
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -160,7 +161,7 @@ class _SignupScreen extends State<SignupScreen> {
       return;
     }
     user =
-        LoginModel(username: name, password: password, leaderboard: name, image: 'assets/images/user.png',);
+        LoginModel(username: name, password: password,);
     addUser(user);
 
     ScaffoldMessenger.of(ctx).showSnackBar(

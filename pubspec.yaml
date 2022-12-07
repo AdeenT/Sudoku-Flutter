@@ -43,6 +43,7 @@ dependencies:
   hive: ^2.2.3
   sudokuer:
   get: ^4.6.5
+  shared_preferences: ^2.0.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

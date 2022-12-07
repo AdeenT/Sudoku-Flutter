@@ -1,9 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sudoku/main.dart';
 import 'package:sudoku/signupin/login_page.dart';
-import 'package:sudoku/signupin/signup_page.dart';
 
 // ignore: must_be_immutable
 class Account extends StatefulWidget {
@@ -18,6 +15,12 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  @override
+  void initState() {
+    widget.userImage = 'assets/images/user.png';
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,11 +115,7 @@ class _AccountState extends State<Account> {
                 width: 160,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                        (Route<dynamic> route) => false);
+                    signout(context);
                   },
                   child: const Text(
                     'Log out',
@@ -197,11 +196,18 @@ class _AccountState extends State<Account> {
             widget.userImage = avatar;
             Navigator.pop(context);
           });
-          user.image = widget.userImage;
         },
         child: CircleAvatar(
           radius: 30,
           child: Image.asset(avatar),
         ),
       );
+
+  signout(BuildContext ctx) {
+    Navigator.of(ctx).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (ctx1) => const LoginScreen(),
+        ),
+        (Route<dynamic> route) => false);
+  }
 }

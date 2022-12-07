@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/model/box_chart.dart';
+import 'package:sudoku/screens/home_screen.dart';
 import 'package:sudokuer/sudokuer.dart' as s;
 
 class GameController extends GetxController {
@@ -78,6 +79,7 @@ class GameController extends GetxController {
       }
     }
     if (isComplete) {
+      starsCollected++;
       Get.back();
     }
   }
