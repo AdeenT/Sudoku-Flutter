@@ -17,7 +17,7 @@ class Account extends StatefulWidget {
 class _AccountState extends State<Account> {
   @override
   void initState() {
-    widget.userImage = 'assets/images/user.png';
+    widget.userImage;
     super.initState();
   }
 

@@ -1,35 +1,23 @@
-// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sudoku/model/game_data_model.dart';
 import 'package:sudoku/model/login_model.dart';
 
-import '../main.dart';
+Rx<LoginModel?> userData = Rx<LoginModel?>(null);
 
-ValueNotifier<List<LoginModel>> usersNotifier = ValueNotifier([]);
-
-Future<void> addUser(LoginModel value) async {
-  final id = await loginDb.add(value);
-  value.uid = id;
-  usersNotifier.notifyListeners();
+Future<void> addUserData(LoginModel user) async {
+  var userDb = await Hive.openBox('user_db');
+  final id = await userDb.add(user);
 }
 
-Future<void> getAllUsers() async {
-  final userDb = await Hive.openBox<LoginModel>('LeaderBoard_db');
-  usersNotifier.value.clear();
-  usersNotifier.value.addAll(userDb.values);
-  usersNotifier.notifyListeners();
+Future<LoginModel?> getUser(String uid)async{
+  var userDb = await Hive.openBox('user_db');
+  userData.value = userDb.get(uid);
+}
+Future<void> addGameData(LoginModel user,GameDataModel star ) async {
+  var gameDb = await Hive.openBox('game_db');
+
+   await gameDb.put(user.uid,star);
 }
 
-Future <void> gameData(GameDataModel value) async{
-  final gameDB = await Hive.openBox('gameData');
-  await gameDB.put(value.id,value);
- 
-}
-
-Future<void> userAvatar() async{
-  final avatarDB = await Hive.openBox('Avatar_Db');
-  
-  usersNotifier.notifyListeners();
-}

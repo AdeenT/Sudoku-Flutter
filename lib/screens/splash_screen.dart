@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sudoku/main.dart';
 import 'package:sudoku/screens/bottom_navigation.dart';
-import 'package:sudoku/screens/home_screen.dart';
 import 'package:sudoku/signupin/login_page.dart';
 import'package:get/get.dart';
 
@@ -54,6 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if(userLoggedIn == null|| userLoggedIn == false){
       Get.offAll(()=>const LoginScreen());
     }else{
+      
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const BottomBar()),);
     }
 

@@ -14,7 +14,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> lists = [
     const HomeScreen(),
     const LeaderBoard(),
-    Account(userImage: '',),
+    Account(userImage: 'assets/images/user.png',),
   ];
   int activeIndex = 0;
   @override

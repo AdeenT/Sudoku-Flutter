@@ -160,9 +160,13 @@ class _SignupScreen extends State<SignupScreen> {
     if (name.isEmpty || password.isEmpty || confirm.isEmpty || confirm!=password ) {
       return;
     }
+
+
+
+
     user =
         LoginModel(username: name, password: password,);
-    addUser(user);
+    addUserData(user);
 
     ScaffoldMessenger.of(ctx).showSnackBar(
       const SnackBar(

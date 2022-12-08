@@ -5,19 +5,15 @@ part'game_data_model.g.dart';
 @HiveType(typeId: 1)
 class GameDataModel extends HiveObject {
   @HiveField(0)
-  int? id;
-
-  @HiveField(1)
   final String star;
 
-  @HiveField(2)
+  @HiveField(1)
   final String avatar;
 
-  @HiveField(3)
+  @HiveField(2)
   final String saveGame;
 
   GameDataModel({
-    this.id,
     required this.star,
     required this.avatar,
     required this.saveGame,

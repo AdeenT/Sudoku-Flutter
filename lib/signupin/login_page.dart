@@ -153,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void checkLogin(BuildContext ctx) async {
     final user = _userController;
     final pass = _passController;
-    var box = Hive.box('login_db');
+    var box = Hive.box('user_db');
 
     for (var element in box.values) {
       if (element.username == user.text && element.password == pass.text) {

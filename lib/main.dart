@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sudoku/functions/db_functions.dart';
 import 'package:sudoku/model/game_data_model.dart';
 import 'package:sudoku/model/login_model.dart';
 import 'package:sudoku/screens/splash_screen.dart';
@@ -21,8 +22,8 @@ Future<void> main() async {
    if (!Hive.isAdapterRegistered(GameDataModelAdapter().typeId)) {
     Hive.registerAdapter(GameDataModelAdapter());
   }
-  gameDataDb = await Hive.openBox('gameData');
-  loginDb = await Hive.openBox('login_db');
+  gameDataDb = await Hive.openBox('game_db');
+  loginDb = await Hive.openBox('user_db');
   runApp(const MyApp());
 }
 
