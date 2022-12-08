@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sudoku/controllers/settings_controllers.dart';
 import 'package:sudoku/main.dart';
 import 'package:sudoku/signupin/login_page.dart';
 
@@ -15,6 +17,8 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+
+final controllr = Get.put(SettingsController());
   @override
   void initState() {
     widget.userImage;
@@ -112,19 +116,7 @@ class _AccountState extends State<Account> {
                 height: 30,
               ),
               SizedBox(
-                width: 160,
-                child: ElevatedButton(
-                  onPressed: () {
-                    signout(context);
-                  },
-                  child: const Text(
-                    'Log out',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 500,
+                height: 400,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListView(
@@ -160,7 +152,7 @@ class _AccountState extends State<Account> {
                         tileColor: Color.fromARGB(255, 235, 249, 244),
                         iconColor: Colors.black,
                       ),
-                      const ListTile(
+                       const ListTile(
                         leading: Icon(Icons.door_front_door_outlined),
                         title: Text('Exit'),
                         tileColor: Color.fromARGB(255, 235, 249, 244),
