@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sudoku/model/login_model.dart';
 
 class LeaderBoard extends StatelessWidget {
   const LeaderBoard({super.key});

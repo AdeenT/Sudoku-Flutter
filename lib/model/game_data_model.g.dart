@@ -8,7 +8,7 @@ part of 'game_data_model.dart';
 
 class GameDataModelAdapter extends TypeAdapter<GameDataModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
   GameDataModel read(BinaryReader reader) {
@@ -17,9 +17,9 @@ class GameDataModelAdapter extends TypeAdapter<GameDataModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GameDataModel(
-      star: fields[1] as String,
-      avatar: fields[2] as String,
-      saveGame: fields[3] as String,
+      star: fields[0] as String,
+      avatar: fields[1] as String,
+      saveGame: fields[2] as String,
     );
   }
 

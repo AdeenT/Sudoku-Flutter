@@ -18,7 +18,7 @@ class Account extends StatefulWidget {
 
 class _AccountState extends State<Account> {
 
-final controllr = Get.put(SettingsController());
+final controller = Get.put(SettingsController());
   @override
   void initState() {
     widget.userImage;
@@ -106,7 +106,7 @@ final controllr = Get.put(SettingsController());
                 ),
               ),
               Text(
-                playerName,
+                playerName.toString(),
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -116,7 +116,7 @@ final controllr = Get.put(SettingsController());
                 height: 30,
               ),
               SizedBox(
-                height: 400,
+                height: MediaQuery.of(context).size.width * 1.2,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListView(

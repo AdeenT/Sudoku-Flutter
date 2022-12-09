@@ -4,7 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sudoku/main.dart';
 import 'package:sudoku/screens/bottom_navigation.dart';
 import 'package:sudoku/signupin/signup_page.dart';
+import 'package:sudoku/functions/db.dart';
 
+// ignore: prefer_typing_uninitialized_variables
+var currentUserID = '';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,7 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final _userController = TextEditingController();
   final _passController = TextEditingController();
   final loginKey = GlobalKey<FormState>();
-  bool islogged = false;
+ 
+
+  @override
+  void initState() {
+    currentUserID;
+   
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           border: OutlineInputBorder(),
                           labelText: 'Username'),
                       validator: (value) {
-                        if (value!.isEmpty || islogged == false) {
+                        if (value!.isEmpty || UserFunctions().isLogged == false) {
                           return 'Please enter a valid username';
                         } else {
                           return null;
@@ -85,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 24,
                     ),
                     TextFormField(
-                     
                         controller: _passController,
                         obscureText: true,
                         decoration: const InputDecoration(
@@ -99,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelText: 'Password',
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || islogged == false) {
+                          if (value!.isEmpty || UserFunctions().isLogged == false) {
                             return 'Please enter a valid password';
                           } else {
                             return null;
@@ -113,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           loginKey.currentState!.validate();
-                          checkLogin(context);
+                          checkLogin(_userController.text,_passController.text);
                         },
                         style: const ButtonStyle(
                           backgroundColor:
@@ -150,26 +159,37 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void checkLogin(BuildContext ctx) async {
-    final user = _userController;
-    final pass = _passController;
-    var box = Hive.box('user_db');
+  void checkLogin(use,pass) async {
+   
+    // var box = Hive.box('user_db');
 
-    for (var element in box.values) {
-      if (element.username == user.text && element.password == pass.text) {
-        playerName = user.text;
-        islogged = true;
-        final sharedprefs = await SharedPreferences.getInstance();
-        await sharedprefs.setBool(USER_KEY, true);
-        // ignore: use_build_context_synchronously
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const BottomBar()),
-        );
-      }
-    }
-    if (islogged == false) {
+   await UserFunctions().loginCheck(use, pass);
+    if (UserFunctions().isLogged == true) {
+      
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const BottomBar()),
+      );
+    } else {
       loginKey.currentState!.validate();
+      // UserFunctions().isLogged == true;
+      
     }
   }
 }
+
+
+    // for (var element in box.values) {
+    //   if (element.username == user.text && element.password == pass.text) {
+    //     islogged = true;
+    //    playerName = user.text;
+
+    //     final sharedprefs = await SharedPreferences.getInstance();
+    //     await sharedprefs.setBool(USER_KEY, true);
+    //     // ignore: use_build_context_synchronously
+    //     Navigator.pushReplacement(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => const BottomBar()),
+    //     );
+    //   }
+    // }

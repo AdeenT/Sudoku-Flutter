@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sudoku/functions/db_functions.dart';
 import 'package:sudoku/model/login_model.dart';
+import 'package:sudoku/model/user_model.dart';
 import 'package:sudoku/signupin/login_page.dart';
+import '../functions/db.dart';
 
-
-// ignore: prefer_typing_uninitialized_variables
-var user;
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
@@ -118,7 +117,7 @@ class _SignupScreen extends State<SignupScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         loginKey.currentState!.validate();
-                        signUpButtonClicked(context);
+                        signUpButtonClicked();
                       },
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
@@ -153,22 +152,19 @@ class _SignupScreen extends State<SignupScreen> {
     );
   }
 
-  Future<void> signUpButtonClicked(BuildContext ctx) async {
+  Future<void> signUpButtonClicked() async {
     final name = _usernameController.text.trim();
     final password = _passwordController.text.trim();
     final confirm = _passConfirmController.text.trim();
     if (name.isEmpty || password.isEmpty || confirm.isEmpty || confirm!=password ) {
       return;
     }
+final user =
+         UserModel(username: name, password: password,);
+        await UserFunctions().addLogin(user) ;
 
 
-
-
-    user =
-        LoginModel(username: name, password: password,);
-    addUserData(user);
-
-    ScaffoldMessenger.of(ctx).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.all(10),
@@ -176,7 +172,7 @@ class _SignupScreen extends State<SignupScreen> {
         content: Text('Account Created'),
       ),
     );
-    Navigator.of(ctx).pushAndRemoveUntil(
+    Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (ctx1) => const LoginScreen()),
         (route) => false);
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/controllers/game_controller.dart';
@@ -126,8 +125,8 @@ class _GamePageState extends State<GamePage> {
                     controller.update();
                   },
                   child: Container(
-                    width: 36.0,
-                    height: 35.0,
+                    width: MediaQuery.of(context).size.width * 0.1,
+                    height: MediaQuery.of(context).size.width * 0.1,
                     margin: EdgeInsets.only(
                       bottom: row % 3 == 2 ? 2 : 0,
                       right: col % 3 == 2 ? 2 : 0,
@@ -230,7 +229,7 @@ class _GamePageState extends State<GamePage> {
             return InkWell(
               onTap: () => controller.onNumberclick(index),
               child: Container(
-                width: 30,
+                width: MediaQuery.of(context).size.width * 0.1,
                 height: 40,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(

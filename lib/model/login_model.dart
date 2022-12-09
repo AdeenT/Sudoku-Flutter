@@ -13,10 +13,14 @@ class LoginModel extends HiveObject {
 
   @HiveField(2)
   final String password;
-
+  
+  @HiveField(3)
+  String? email;
+ 
   LoginModel({
     this.uid,
     required this.username,
     required this.password,
+    this.email,
   });
 }
