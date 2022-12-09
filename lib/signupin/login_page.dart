@@ -7,7 +7,7 @@ import 'package:sudoku/signupin/signup_page.dart';
 import 'package:sudoku/functions/db.dart';
 
 // ignore: prefer_typing_uninitialized_variables
-var currentUserID = '';
+var currentUserID = 'keep';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,12 +20,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final _userController = TextEditingController();
   final _passController = TextEditingController();
   final loginKey = GlobalKey<FormState>();
- 
 
   @override
   void initState() {
     currentUserID;
-   
+
     super.initState();
   }
 
@@ -84,7 +83,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           border: OutlineInputBorder(),
                           labelText: 'Username'),
                       validator: (value) {
-                        if (value!.isEmpty || UserFunctions().isLogged == false) {
+                        if (value!.isEmpty ||
+                            UserFunctions().isLogged == false) {
                           return 'Please enter a valid username';
                         } else {
                           return null;
@@ -108,7 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelText: 'Password',
                         ),
                         validator: (value) {
-                          if (value!.isEmpty || UserFunctions().isLogged == false) {
+                          if (value!.isEmpty ||
+                              UserFunctions().isLogged == false) {
                             return 'Please enter a valid password';
                           } else {
                             return null;
@@ -122,7 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           loginKey.currentState!.validate();
-                          checkLogin(_userController.text,_passController.text);
+                          checkLogin(
+                              _userController.text, _passController.text);
                         },
                         style: const ButtonStyle(
                           backgroundColor:
@@ -159,37 +161,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void checkLogin(use,pass) async {
-   
-    // var box = Hive.box('user_db');
-
-   await UserFunctions().loginCheck(use, pass);
-    if (UserFunctions().isLogged == true) {
+  checkLogin(userr, pass) {
+    UserFunctions().loginCheck(userr, pass);
+    if (UserFunctions().isLogged = true) {
+      UserFunctions().keepUser(context);
       
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const BottomBar()),
-      );
     } else {
-      loginKey.currentState!.validate();
-      // UserFunctions().isLogged == true;
-      
+       loginKey.currentState!.validate(); 
     }
   }
 }
-
-
-    // for (var element in box.values) {
-    //   if (element.username == user.text && element.password == pass.text) {
-    //     islogged = true;
-    //    playerName = user.text;
-
-    //     final sharedprefs = await SharedPreferences.getInstance();
-    //     await sharedprefs.setBool(USER_KEY, true);
-    //     // ignore: use_build_context_synchronously
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => const BottomBar()),
-    //     );
-    //   }
-    // }
