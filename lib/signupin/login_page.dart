@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -84,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelText: 'Username'),
                       validator: (value) {
                         if (value!.isEmpty ||
-                            UserFunctions().isLogged == false) {
+                            UserFunctions().isLogged.value == false) {
                           return 'Please enter a valid username';
                         } else {
                           return null;
@@ -109,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty ||
-                              UserFunctions().isLogged == false) {
+                              UserFunctions().isLogged.value == false) {
                             return 'Please enter a valid password';
                           } else {
                             return null;
@@ -161,13 +163,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  checkLogin(userr, pass) {
-    UserFunctions().loginCheck(userr, pass);
-    if (UserFunctions().isLogged = true) {
+  checkLogin(userr, pass) async {
+    bool b=await UserFunctions().loginCheck(userr, pass);
+    if (b){
+      print('it works');
       UserFunctions().keepUser(context);
-      
-    } else {
-       loginKey.currentState!.validate(); 
+    } else{
+      print('else is working...');
+      loginKey.currentState!.validate();
     }
   }
 }

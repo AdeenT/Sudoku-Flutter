@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sudoku/functions/db_functions.dart';
-import 'package:sudoku/model/login_model.dart';
 import 'package:sudoku/model/user_model.dart';
 import 'package:sudoku/signupin/login_page.dart';
 import '../functions/db.dart';
@@ -160,7 +158,7 @@ class _SignupScreen extends State<SignupScreen> {
       return;
     }
 final user =
-         UserModel(username: name, password: password,);
+         UserModel(username: name, password: password, id: DateTime.now().millisecond.toString());
         await UserFunctions().addLogin(user) ;
 
 

@@ -4,7 +4,7 @@ part 'user_model.g.dart';
 @HiveType(typeId: 1)
 class UserModel extends HiveObject {
   @HiveField(0)
-  int? id;
+  String? id;
 
   @HiveField(1)
   String? username;
@@ -23,6 +23,6 @@ class UserModel extends HiveObject {
     this.username,
     this.password,
     this.star = 0,
-    this.profile
+    this.profile='mmm'
   });
 }
