@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:sudoku/model/user_model.dart';
 import 'package:sudoku/signupin/login_page.dart';

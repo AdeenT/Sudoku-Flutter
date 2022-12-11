@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sudoku/controllers/howtoplay.dart';
 import 'package:sudoku/controllers/settings_controllers.dart';
 import 'package:sudoku/main.dart';
 import 'package:sudoku/signupin/login_page.dart';
@@ -17,8 +18,7 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
-
-final controller = Get.put(SettingsController());
+  final controller = Get.put(SettingsController());
   @override
   void initState() {
     widget.userImage;
@@ -124,52 +124,59 @@ final controller = Get.put(SettingsController());
                       const SizedBox(
                         height: 30,
                       ),
-                      const ListTile(
-                        leading: Icon(Icons.event_note_sharp),
-                        title: Text('How to Play'),
-                        trailing: Icon(Icons.arrow_forward_ios),
-                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                      ListTile(
+                        leading: const Icon(Icons.event_note_sharp),
+                        title: const Text('How to Play'),
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        tileColor: const Color.fromARGB(255, 235, 249, 244),
                         iconColor: Colors.black,
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HowToPlay(),
+                            )),
                       ),
                       const SizedBox(
                         height: 15,
                       ),
-                      const ListTile(
-                        leading: Icon(Icons.feedback_outlined),
-                        title: Text('Feedback'),
-                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                      ListTile(
+                        leading: const Icon(Icons.feedback_outlined),
+                        title: const Text('Feedback'),
+                        tileColor: const Color.fromARGB(255, 235, 249, 244),
                         iconColor: Colors.black,
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const FeedbackDialog());
+                        },
                       ),
-                      const ListTile(
-                        leading: Icon(Icons.info_outline),
-                        title: Text('About'),
-                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                      ListTile(
+                        leading: const Icon(Icons.info_outline),
+                        title: const Text('About'),
+                        tileColor: const Color.fromARGB(255, 235, 249, 244),
                         iconColor: Colors.black,
+                        onTap: () => controller.aboutApp(context),
                       ),
-                      const ListTile(
-                        leading: Icon(Icons.help_outline_sharp),
-                        title: Text('Help'),
-                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                      ListTile(
+                        leading: const Icon(Icons.help_outline_sharp),
+                        title: const Text('Help'),
+                        tileColor: const Color.fromARGB(255, 235, 249, 244),
                         iconColor: Colors.black,
+                        onTap: () => controller.helpSection(context),
                       ),
-                       const ListTile(
-                        leading: Icon(Icons.door_front_door_outlined),
-                        title: Text('Exit'),
-                        tileColor: Color.fromARGB(255, 235, 249, 244),
+                      ListTile(
+                        leading: const Icon(Icons.door_front_door_outlined),
+                        title: const Text('Exit'),
+                        tileColor: const Color.fromARGB(255, 235, 249, 244),
                         iconColor: Colors.black,
+                        onTap: () => controller.showExitPopup(context),
                       ),
                       ListTile(
                         leading: const Icon(Icons.logout),
                         title: const Text('Log out'),
                         tileColor: const Color.fromARGB(255, 235, 249, 244),
                         iconColor: Colors.red,
-                        onTap: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                              (Route<dynamic> route) => false);
-                        },
+                        onTap: () => controller.logoutApp(context),
                       ),
                     ],
                   ),

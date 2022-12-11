@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -23,7 +23,7 @@ class UserFunctions {
     final ulist = await getUserData();
     await Future.forEach(ulist, (UserModel element) {
       if (element.username == username && element.password == password) {
-        print('jjgijgfi');
+        print('checking is successful');
 
         isLogged.value = true;
         isLogged.notifyListeners();
