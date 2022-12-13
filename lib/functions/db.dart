@@ -24,7 +24,7 @@ class UserFunctions {
     await Future.forEach(ulist, (UserModel element) {
       if (element.username == username && element.password == password) {
         print('checking is successful');
-
+        print(ulist.indexOf(element));
         isLogged.value = true;
         isLogged.notifyListeners();
       } else {

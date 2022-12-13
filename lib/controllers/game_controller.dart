@@ -69,7 +69,7 @@ class GameController extends GetxController {
     }
   }
 
-  void isComplete() {
+  isComplete() {
     bool isComplete = true;
     for (var i = 0; i < sudoku.length; i++) {
       for (var j = 0; j < sudoku.length; j++) {

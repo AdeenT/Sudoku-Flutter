@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sudoku/model/game_data_model.dart';
-
+import 'package:sudoku/model/user_model.dart';
 import 'game_page.dart';
 
 var starLength = '';
@@ -132,9 +131,11 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       );
 
-  void starCount() async {
+  void starCount(UserModel value) async {
     starLength = starsCollected.toString();
+    UserModel(id:value.id ,star: value.star);
 
-    GameDataModel(star: starLength, avatar: '', saveGame: '');
+    
+
   }
 }
