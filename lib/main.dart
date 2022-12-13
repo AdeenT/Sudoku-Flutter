@@ -17,18 +17,10 @@ late var gameDataDb;
 const USER_KEY= 'keep user logged in';
 Future<void> main() async {
  await Hive.initFlutter();
-  // if (!Hive.isAdapterRegistered(LoginModelAdapter().typeId)) {
-  //   Hive.registerAdapter(LoginModelAdapter());
-  // }
-  //  if (!Hive.isAdapterRegistered(GameDataModelAdapter().typeId)) {
-  //   Hive.registerAdapter(GameDataModelAdapter());
-  // }
   if(!Hive.isAdapterRegistered(UserModelAdapter().typeId)){
     Hive.registerAdapter(UserModelAdapter());
   }
   allData = await Hive.openBox('user model');
-  //  gameDataDb = await Hive.openBox('user_db');
-  //  loginDb = await Hive.openBox('user_db');
   runApp(const MyApp());
 }
 
