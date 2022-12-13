@@ -160,10 +160,10 @@ class _SignupScreen extends State<SignupScreen> {
       return;
     }
 final user =
-         UserModel(username: name, password: password, id: DateTime.now().millisecond.toString());
+         UserModel(username: name, password: password, id: DateTime.now().toString());
+        //  print(user.username);
+            print(user.id);
         await UserFunctions().addLogin(user) ;
-        // String currentUser = UserModel().id.toString();
-
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

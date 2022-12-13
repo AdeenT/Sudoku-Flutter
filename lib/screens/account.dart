@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sudoku/controllers/howtoplay.dart';
 import 'package:sudoku/controllers/settings_controllers.dart';
 import 'package:sudoku/main.dart';

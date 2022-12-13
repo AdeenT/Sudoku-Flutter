@@ -1,5 +1,6 @@
-// ignore_for_file: use_build_context_synchronously, avoid_print
+// ignore_for_file: use_build_context_synchronously, avoid_print, unrelated_type_equality_checks
 import 'package:flutter/material.dart';
+import 'package:sudoku/model/user_model.dart';
 import 'package:sudoku/signupin/signup_page.dart';
 import 'package:sudoku/functions/db.dart';
 // ignore: prefer_typing_uninitialized_variables
@@ -120,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           loginKey.currentState!.validate();
                           checkLogin(
-                              _userController.text, _passController.text);
+                              _userController, _passController);
                         },
                         style: const ButtonStyle(
                           backgroundColor:
@@ -158,8 +159,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   checkLogin(userr, pass) async {
-    bool b=await UserFunctions().loginCheck(userr, pass);
-    if (b){
+    bool b=await UserFunctions().loginCheck(userr.text, pass.text);
+    print(b);
+    if (b) {
       print('it works');
       UserFunctions().keepUser(context);
     } else{

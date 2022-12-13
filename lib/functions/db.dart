@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sudoku/main.dart';
 import 'package:sudoku/model/user_model.dart';
 import '../screens/bottom_navigation.dart';
 
@@ -21,18 +22,19 @@ class UserFunctions {
 
   Future<bool> loginCheck(username, password) async {
     final ulist = await getUserData();
+    bool? bol;
     await Future.forEach(ulist, (UserModel element) {
       if (element.username == username && element.password == password) {
         print('checking is successful');
-        print(ulist.indexOf(element));
-        isLogged.value = true;
+        print(element.id.toString());
+        playerName = element.username;
+        bol = true;
         isLogged.notifyListeners();
       } else {
-        isLogged.value = false;
         isLogged.notifyListeners();
       }
     });
-    return isLogged.value == true ? true : false;
+    return bol==true? true : false;
   }
 
   keepUser(BuildContext context) {
