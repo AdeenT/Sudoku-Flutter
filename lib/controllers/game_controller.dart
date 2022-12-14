@@ -1,5 +1,4 @@
 // ignore_for_file: unrelated_type_equality_checks, duplicate_ignore
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/model/box_chart.dart';
@@ -10,6 +9,7 @@ import '../main.dart';
 import '../model/user_model.dart';
 
 class GameController extends GetxController {
+ final userModel = UserFunctions();
   RxList<List<SudokuCell>> sudoku = RxList<List<SudokuCell>>();
   RxInt mistakes = 3.obs;
   RxInt hints = 3.obs;
@@ -228,7 +228,7 @@ class GameController extends GetxController {
 
     Future<void> updateStar(ctx) async {
     final userStar = UserModel(star: starsCollected);
-    UserFunctions().updateUser(currentUserID, userStar);
-    log(currentUserID.toString());
+    userModel.updateUser(currentUserID, userStar);
+    await userModel.getUserData();
   }
 }

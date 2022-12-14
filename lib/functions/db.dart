@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sudoku/main.dart';
 import 'package:sudoku/model/user_model.dart';
+import 'package:sudoku/screens/home_screen.dart';
 import '../screens/bottom_navigation.dart';
 String? ima;
 class UserFunctions {
@@ -33,7 +34,7 @@ class UserFunctions {
         playerName = element.username;
         currentUserID = int.parse(element.id.toString());
         ima=element.profile;
-
+        starsCollected = element.star!;
         bol = true;
         isLogged.notifyListeners();
       } else {
@@ -48,6 +49,7 @@ class UserFunctions {
     await userDB.put(model.id, model);
     print('image updated');
     ima=model.profile;
+    starsCollected = model.star!;
     log(model.profile.toString(), name: 'user image');
     await getUserData();
   }

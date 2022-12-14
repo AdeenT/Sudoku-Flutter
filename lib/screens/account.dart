@@ -44,7 +44,7 @@ class _AccountState extends State<Account> {
 
  @override
   void initState() {
-    print(ima);
+    log(ima.toString(), name: 'state');
    checkImage();
   log( accountModel.profile.toString(),name: "db image");
     super.initState();
