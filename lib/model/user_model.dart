@@ -11,18 +11,17 @@ class UserModel extends HiveObject {
 
   @HiveField(2)
   String? password;
-  
+
   @HiveField(3)
   int? star;
 
   @HiveField(4)
   String? profile;
- 
-  UserModel({
-    this.id,
-    this.username,
-    this.password,
-    this.star = 0,
-    this.profile='mmm'
-  });
+
+  UserModel(
+      {this.id,
+      this.username,
+      this.password,
+      this.star = 0,
+      this.profile });
 }

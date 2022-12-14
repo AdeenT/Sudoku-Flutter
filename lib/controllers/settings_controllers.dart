@@ -67,7 +67,7 @@ class SettingsController extends GetxController {
                 MaterialPageRoute(
                   builder: (ctx1) => const LoginScreen(),
                 ),
-                (Route<dynamic> route) => false),
+                (route) => false),
             child: const Text('Yes'),
           ),
         ],

@@ -6,21 +6,17 @@ import 'package:sudoku/model/user_model.dart';
 import 'package:sudoku/screens/splash_screen.dart';
 import 'package:get/get.dart';
 
-
 late var loginDb;
 late var gameDataDb;
- dynamic playerName;
- 
- late var allData;
-
+dynamic playerName;
+ int currentUserID = 0;
 // ignore: constant_identifier_names
-const USER_KEY= 'keep user logged in';
+const USER_KEY = 'keep user logged in';
 Future<void> main() async {
- await Hive.initFlutter();
-  if(!Hive.isAdapterRegistered(UserModelAdapter().typeId)){
+  await Hive.initFlutter();
+  if (!Hive.isAdapterRegistered(UserModelAdapter().typeId)) {
     Hive.registerAdapter(UserModelAdapter());
   }
-  allData = await Hive.openBox('user model');
   runApp(const MyApp());
 }
 

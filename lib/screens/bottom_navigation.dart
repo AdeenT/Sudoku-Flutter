@@ -16,14 +16,14 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> lists = [
     const HomeScreen(),
     const LeaderBoard(),
-    Account(userImage: 'assets/images/user.png',),
+    const Account(),
   ];
   int activeIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => Get.put(SettingsController().showExitPopup(context)) ,
+      onWillPop: () => Get.put(SettingsController().showExitPopup(context)),
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: activeIndex,
@@ -59,4 +59,3 @@ class _BottomBarState extends State<BottomBar> {
     );
   }
 }
-

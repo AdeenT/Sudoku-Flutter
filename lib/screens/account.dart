@@ -1,16 +1,20 @@
+// ignore_for_file: avoid_print
+
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/controllers/howtoplay.dart';
 import 'package:sudoku/controllers/settings_controllers.dart';
+import 'package:sudoku/functions/db.dart';
 import 'package:sudoku/main.dart';
+import 'package:sudoku/model/user_model.dart';
 import 'package:sudoku/signupin/login_page.dart';
 
 // ignore: must_be_immutable
 class Account extends StatefulWidget {
-  String userImage = 'assets/images/user.png';
-  Account({
+   
+  const Account({
     Key? key,
-    required this.userImage,
   }) : super(key: key);
 
   @override
@@ -19,15 +23,38 @@ class Account extends StatefulWidget {
 
 class _AccountState extends State<Account> {
   final controller = Get.put(SettingsController());
+  final accountModel = UserModel();
+  final userModel = UserFunctions();
+  
+  String? image;
 
-  @override
+ void checkImage(){
+  if(ima == null){
+    setState(() {
+       image = 'assets/images/user.png';
+    });
+   
+  }else{
+    setState(() {
+       image = ima;
+    });
+   
+  }
+ }
+
+ @override
   void initState() {
-    widget.userImage;
+    print(ima);
+   checkImage();
+  log( accountModel.profile.toString(),name: "db image");
     super.initState();
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
+    //  log(widget.userImage,name: 'images');
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -103,7 +130,7 @@ class _AccountState extends State<Account> {
                 backgroundColor: Colors.transparent,
                 radius: 45,
                 child: ClipRRect(
-                  child: Image.asset(widget.userImage),
+                  child: Image.asset(image!),
                 ),
               ),
               Text(
@@ -193,9 +220,10 @@ class _AccountState extends State<Account> {
   Widget _avatarPics(String avatar) => InkWell(
         onTap: () {
           setState(() {
-            widget.userImage = avatar;
+            image = avatar;
             Navigator.pop(context);
           });
+          updateImage(context);
         },
         child: CircleAvatar(
           radius: 30,
@@ -209,5 +237,16 @@ class _AccountState extends State<Account> {
           builder: (ctx1) => const LoginScreen(),
         ),
         (Route<dynamic> route) => false);
+  }
+
+  Future<void> updateImage(ctx) async {
+    final userdp = UserModel(id:currentUserID.toString(),profile:image);
+    log(image.toString());
+    userModel.updateUser(currentUserID, userdp);
+   await  userModel.getUserData();
+    print(currentUserID.toString());
+    log(currentUserID.toString());
+    print('profile updated successfully');
+    log(userdp.toString() ,name: 'image');
   }
 }

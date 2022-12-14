@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:sudoku/main.dart';
 import 'package:sudoku/model/user_model.dart';
 import 'package:sudoku/signupin/login_page.dart';
 import '../functions/db.dart';
@@ -102,8 +103,8 @@ class _SignupScreen extends State<SignupScreen> {
                         labelText: 'Confirm Password',
                       ),
                       validator: (value) {
-                        if (
-                            _passConfirmController.text != _passwordController.text) {
+                        if (_passConfirmController.text !=
+                            _passwordController.text) {
                           return 'Please enter password correctly';
                         } else {
                           return null;
@@ -156,14 +157,19 @@ class _SignupScreen extends State<SignupScreen> {
     final name = _usernameController.text.trim();
     final password = _passwordController.text.trim();
     final confirm = _passConfirmController.text.trim();
-    if (name.isEmpty || password.isEmpty || confirm.isEmpty || confirm!=password ) {
+    if (name.isEmpty ||
+        password.isEmpty ||
+        confirm.isEmpty ||
+        confirm != password) {
       return;
     }
-final user =
-         UserModel(username: name, password: password, id: DateTime.now().toString());
-        //  print(user.username);
-            print(user.id);
-        await UserFunctions().addLogin(user) ;
+    final user = UserModel(
+      username: name,
+      password: password,
+      id: DateTime.now().millisecond.toString(),
+    );
+    currentUserID = int.parse(user.id.toString());
+    await UserFunctions().addLogin(user);
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

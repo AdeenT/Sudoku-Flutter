@@ -1,10 +1,13 @@
 // ignore_for_file: unrelated_type_equality_checks, duplicate_ignore
-
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sudoku/model/box_chart.dart';
 import 'package:sudoku/screens/home_screen.dart';
 import 'package:sudokuer/sudokuer.dart' as s;
+import '../functions/db.dart';
+import '../main.dart';
+import '../model/user_model.dart';
 
 class GameController extends GetxController {
   RxList<List<SudokuCell>> sudoku = RxList<List<SudokuCell>>();
@@ -221,5 +224,11 @@ class GameController extends GetxController {
         }
       }
     }
+  }
+
+    Future<void> updateStar(ctx) async {
+    final userStar = UserModel(star: starsCollected);
+    UserFunctions().updateUser(currentUserID, userStar);
+    log(currentUserID.toString());
   }
 }

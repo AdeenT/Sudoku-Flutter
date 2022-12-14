@@ -1,9 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sudoku/model/user_model.dart';
+import '../main.dart';
 import 'game_page.dart';
 
-var starLength = '';
 var starsCollected = 0;
 
 class HomeScreen extends StatefulWidget {
@@ -14,11 +15,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
   @override
   void initState() {
     setState(() {
-      starLength = starsCollected.toString();
+      starsCollected.toString();
     });
     super.initState();
   }
@@ -84,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
+                  log(currentUserID.toString());
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -131,11 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       );
 
-  void starCount(UserModel value) async {
-    starLength = starsCollected.toString();
-    UserModel(id:value.id ,star: value.star);
+  // void starCount(UserModel value) async {
+  //   starLength = starsCollected.toString();
+  //   UserModel(id: value.id, star: value.star);
+  // }
 
-    
-
-  }
 }
