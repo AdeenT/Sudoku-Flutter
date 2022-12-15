@@ -193,6 +193,13 @@ class _AccountState extends State<Account> {
                         onTap: () => controller.helpSection(context),
                       ),
                       ListTile(
+                        leading: const Icon(Icons.logout),
+                        title: const Text('Terms & condition'),
+                        tileColor: const Color.fromARGB(255, 235, 249, 244),
+                        iconColor: Colors.black,
+                        onTap: () => controller.termsConditions(context),
+                      ),
+                      ListTile(
                         leading: const Icon(Icons.door_front_door_outlined),
                         title: const Text('Exit'),
                         tileColor: const Color.fromARGB(255, 235, 249, 244),
